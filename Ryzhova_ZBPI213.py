@@ -5,7 +5,7 @@ def fact(x):
    if x==1:
        return 1
    return x*fact(x-1)
-x=int(input())
+#x=int(input())
 
 #вызываем функцию f(5)=f(4)*5
 #f(4)=f(3)*4
@@ -19,9 +19,9 @@ def filter_even(li):
     a=list(filter(lambda x: x%2==0, li))
     return a
 
-li=map(int,input().split())
-print(filter_even(li))
-li=[11,22,33,44,55,88,99,66]
+#li=map(int,input().split())
+#print(filter_even(li))
+#li=[11,22,33,44,55,88,99,66]
 
 #3
 def square(li):
@@ -47,10 +47,10 @@ def bin_search(li, element):
 
 a=sorted([3,1,9,5,2,7])
 b=-1
-print(bin_search(a, b))
+#print(bin_search(a, b))
 
-a=sorted([3,1,9,5,2,7])
-b=9
+#a=sorted([3,1,9,5,2,7])
+#b=9
 
 #5
 #решение с помощью рекурсии
