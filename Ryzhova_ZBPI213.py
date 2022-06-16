@@ -98,43 +98,169 @@ def calculate(path2file):
 
 #7
 def substring_slice(path2file_1,path2file_2):
-   f1=open(path2file_1)
-   f2=open(path2file_2)
-   f1=f1.readlines()
-   f2=f2.readlines()
-   string=''
-   number=''
-   answer=''
-   result=''
-   for i in f1:#проходим по элементам 1 файла
+    f1=open(path2file_1)
+    f2=open(path2file_2)
+    f1=f1.readlines()
+    f2=f2.readlines()
+    string=''
+    number=''
+    answer=''
+    result=''
+    for i in f1:#проходим по элементам 1 файла
         string+=i
-    string=string.replace("\n", '  ')
-    string=string.split('  ') 
+        string=string.replace("\n", '  ')
+        string=string.split('  ') 
     
-   for i in f2:#проходим по элементам 2 файла
+    for i in f2:#проходим по элементам 2 файла
         number+=i
-    number=number.replace("\n", '  ')
-    number=number.split('  ')
+        number=number.replace("\n", '  ')
+        number=number.split('  ')
     
     for i in range(len(string)):
         str=string[i]
         ind=number[i].split()
-        answer=str[int(ind[0]):(int(ind[1]+1)]
+        answer=str[int(ind[0]):(int(ind[1])+1)]
         result+=answer+" "
-   result=result.strip()
-   return result
+        result=result.strip()
+    return result
 
 #print(substring_slice(f1,f2))
 
 #8
-periodic_table=json.load(open('periodic_table', encoding='utf-8'))
+def decode_ch(string_of_elements):
+    periodic_table = {
+    "Ac": "Актиний",
+    "Ag": "Серебро",
+    "Al": "Алюминий",
+    "Am": "Америций",
+    "Ar": "Аргон",
+    "As": "Мышьяк",
+    "At": "Астат",
+    "Au": "Золото",
+    "B": "Бор",
+    "Ba": "Барий",
+    "Be": "Бериллий",
+    "Bh": "Борий",
+    "Bi": "Висмут",
+    "Bk": "Берклий",
+    "Br": "Бром",
+    "C": "Углерод",
+    "Ca": "Кальций",
+    "Cd": "Кадмий",
+    "Ce": "Церий",
+    "Cf": "Калифорний",
+    "Cl": "Хлор",
+    "Cm": "Кюрий",
+    "Cn": "Коперниций",
+    "Co": "Кобальт",
+    "Cr": "Хром",
+    "Cs": "Цезий",
+    "Cu": "Медь",
+    "Db": "Дубний",
+    "Ds": "Дармштадтий",
+    "Dy": "Диспрозий",
+    "Er": "Эрбий",
+    "Es": "Эйнштейний",
+    "Eu": "Европий",
+    "F": "Фтор",
+    "Fe": "Железо",
+    "Fl": "Флеровий",
+    "Fm": "Фермий",
+    "Fr": "Франций",
+    "Ga": "Галий",
+    "Gd": "Гадолиний",
+    "Ge": "Германий",
+    "H": "Водород",
+    "He": "Гелий",
+    "Hf": "Гафний",
+    "Hg": "Ртуть",
+    "Ho": "Гольмий",
+    "Hs": "Хассий",
+    "I": "Йод",
+    "In": "Индий",
+    "Ir": "Иридий",
+    "K": "Калий",
+    "Kr": "Криптон",
+    "La": "Лантан",
+    "Li": "Литий",
+    "Lr": "Лоуренсий",
+    "Lu": "Лютеций",
+    "Lv": "Ливерморий",
+    "Mc": "Московий",
+    "Md": "Менделевий",
+    "Mg": "Магний",
+    "Mn": "Марганец",
+    "Mo": "Молибден",
+    "Mt": "Мейтнерий",
+    "N": "Азот",
+    "Na": "Натрий",
+    "Nb": "Ниобий",
+    "Nd": "Неодим",
+    "Ne": "Неон",
+    "Nh": "Нихоний",
+    "Ni": "Никель",
+    "No": "Нобелий",
+    "Np": "Нептуний",
+    "O": "Кислород",
+    "Ods": "Пасхалочка",
+    "Og": "Оганесон",
+    "Os": "Осмий",
+    "P": "Фосфор",
+    "Pa": "Протактиний",
+    "Pb": "Свинец",
+    "Pd": "Палладий",
+    "Pm": "Прометий",
+    "Po": "Полоний",
+    "Pr": "Празеодим",
+    "Pt": "Платина",
+    "Pu": "Плутоний",
+    "Ra": "Радий",
+    "Rb": "Рубидий",
+    "Re": "Рений",
+    "Rf": "Разерфордий",
+    "Rg": "Ренгений",
+    "Rh": "Родий",
+    "Rn": "Радон",
+    "Ru": "Рутений",
+    "S": "Сера",
+    "Sb": "Сурьма",
+    "Sc": "Скандий",
+    "Se": "Селен",
+    "Sg": "Сиборгий",
+    "Si": "Кремний",
+    "Sm": "Самарий",
+    "Sn": "Олово",
+    "Sr": "Стронций",
+    "Ta": "Тантал",
+    "Tb": "Тербий",
+    "Tc": "Технеций",
+    "Te": "Теллур",
+    "Th": "Торий",
+    "Ti": "Титан",
+    "Tl": "Таллий",
+    "Tm": "Тулий",
+    "Ts": "Теннессин",
+    "U": "Уран",
+    "Uue": "Унуненний",
+    "V": "Ванадий",
+    "W": "Вольфрам",
+    "Xe": "Ксенон",
+    "Y": "Иттрий",
+    "Yb": "Иттербий",
+    "Zn": "Цинк",
+    "Zr": "Цирконий"
+    }
+    result = ''
+    for i in range(len(string_of_elements)):
+        if string_of_elements[i].isupper():
+            element = string_of_elements[i]
+        elif string_of_elements[i].islower():
+            element += string_of_elements[i]
+        if i != len(string_of_elements) - 1 and string_of_elements[i + 1].isupper():
+            result += periodic_table[element]
+    result += periodic_table[element]
+    return result
 
-def decode(sting_of_elements):
-    encoding=''
-    strin=re.sub(r'([A-Z])', r' \1', sting_of_elements).split()
-    for i in strin:
-        encodS+=periodic_table[i]
-    return encodS
 
 #9
 from statistics import mean
