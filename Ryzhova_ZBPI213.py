@@ -25,9 +25,10 @@ def filter_even(li):
 
 #3
 def square(li):
-    return li**2
-a=[2, 4, 6, 8, 9, 11]
-s=list(map(square, a))
+    return list(map(lambda x: x*x, li))
+   pass
+#a=[2, 4, 6, 8, 9, 11]
+#s=list(map(square, a))
 
 
 #4
@@ -56,12 +57,19 @@ b=-1
 #решение с помощью рекурсии
 #один символ и пустая строка является палиндромом
 def is_palindtome(string):
-    string=''.join([*filter(str.isalpha, string.lower())])#фильтруем приведя к нижнему регистру и оставляя только буквы
-    if len(string) <= 1:  # проверяем длину строки
-        return 'YES'
-    if string[0] != string[-1]:  # проверяем одинаковые 1 и последнюю букву
-        return 'NO'
-    return is_palindtome(string[1:-1])  # заново проверяем строку без 1 и последней буквы
+    string=string.lower()
+    string=''.join(filter(str.isalpha, string))
+    right=len(string)-1
+    left=0
+    palindtome="YES"
+    
+    while left<right:
+        if string[left]==string[right]:
+            left=left-1
+        else:
+            palindtome="NO"
+            break
+        return palindtome  
 
 
 
@@ -98,61 +106,77 @@ def substring_slice(path2file_1,path2file_2):
    f2=open(path2file_2)
    f1=f1.readlines()
    f2=f2.readlines()
-   str_1, str_2='', ''
-   x=0
-   z=0
-   zn_1, zn_2, res='', '', ''
+   string=''
+   number=''
+   answer=''
+   result=''
    for i in f1:#проходим по элементам 1 файла
-        str_1+=i
-   for j in f2:#проходим по элементам 2 файла
-        str_2+=j
-   str_1, str_2=str_1.split(), str_2.split()
-   while x+1<len(str_2):
-        zn_1=int(str_2[x])#1 значение
-        zn_2=int(str_2[x+1])+1#последнее
-        x=x+2
-        for i in range(len(f1)):
-            if z==i:
-                n=f1[i]
-                for w in range(len(n)):
-                    res=res+n[zn_1:zn_2]+' '
-                    break
-        z+=1
-   f1.close()
-   f2.close()
-   return res
+        string+=i
+    string=string.replace("\n", '  ')
+    string=string.split('  ') 
+    
+   for i in f2:#проходим по элементам 2 файла
+        number+=i
+    number=number.replace("\n", '  ')
+    number=number.split('  ')
+    
+    for i in range(len(string)):
+        str=string[i]
+        ind=number[i].split()
+        answer=str[int(ind[0]):(int(ind[1]+1)]
+        result+=answer+" "
+   result=result.strip()
+   return result
 
 #print(substring_slice(f1,f2))
 
 #8
-with open('periodic_table.json', 'r', encoding='utf-8') as f:
-    data=json.load(f)
-def decode_ch(sting_of_elements):
-    s=re.findall('[A-Z][a-z]*', sting_of_elements)#разделяет на элементы если находит заглавную букву
-    for i in s:
-        if i in data.keys():
-           print(data[i], end='')
-(decode_ch('NOTiFICaTiON'))
+periodic_table=json.load(open('periodic_table', encoding='utf-8'))
+
+def decode(sting_of_elements):
+    encoding=''
+    strin=re.sub(r'([A-Z])', r' \1', sting_of_elements).split()
+    for i in strin:
+        encodS+=periodic_table[i]
+    return encodS
 
 #9
-class Student():
-    def __init__(self, first_name, last_name):
-        """инициализируем атрибуты имя, фамилия, всё вместе"""
-        self.name=first_name
-        self.surname=last_name
-        self.fullname=first_name+' '+last_name
-        self.grades=[]
-    def greeting(self):
-        print('Hello, I am Student '+self.fullname.title())
-    def mean_grade(self, grades):
-        for i in grades:
-            self.grades.append(i)
-            a=(sum(map(int,grades)))/len(grades)
-        print(a)
-s1=Student("Masha", "Smirnova")
-print(s1.fullname)
-s1.greeting()
-s1.mean_grade([3, 4, 5])
+from statistics import mean
+class Student:
+
+    def __init__(self, name, surname):
+        self.name = name
+        self.surname = surname
+        self.fullname= '{} {}'.format(name, surname)
+        #print('Student exict') #for me
+     
+    def greeting(self): #метод экземпляра
+        return 'Hello, I am '+ str(Student) 
+
+    grades=[3,4,5] #не очень понимаю зачем нам атрибут класса, если мы его и так подаем каждому студенту подаем аргументом дефолт
+    def __init__(self, name, surname, grades=[3,4,5]):
+        self.name = name
+        self.surname = surname
+        self.fullname= '{} {}'.format(name, surname)
+        self.grades =grades
+
+    def mean_grade(self): 
+        mg = mean(self.grades)
+        return mg
+
+    def is_otlichnik(self):   
+        if self.mean_grade()>= 4.5:
+            return 'YES'
+        else:
+            return 'NO'
+
+    def __add__(self, other):
+        if isinstance(other, Student):
+            return '{Name1} is friends with {Name2}'.format(Name1=self.name, Name2=other.name)
+
+    def __str__(self):
+        return self.fullname
+
 
 #10
 class MyError(Exception):
