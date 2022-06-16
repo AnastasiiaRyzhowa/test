@@ -1,13 +1,12 @@
+import json
+import re
 #1
 def fact(x):
    if x==1:
        return 1
    return x*fact(x-1)
 x=int(input())
-print(fact(x))
-print(fact(5))
-print(fact(4))
-print(fact(8))
+
 #вызываем функцию f(5)=f(4)*5
 #f(4)=f(3)*4
 #f(3)=f(2)*3
@@ -23,14 +22,13 @@ def filter_even(li):
 li=map(int,input().split())
 print(filter_even(li))
 li=[11,22,33,44,55,88,99,66]
-print(filter_even(li))
 
 #3
 def square(li):
     return li**2
 a=[2, 4, 6, 8, 9, 11]
 s=list(map(square, a))
-print(s)
+
 
 #4
 def bin_search(li, element):
@@ -53,11 +51,6 @@ print(bin_search(a, b))
 
 a=sorted([3,1,9,5,2,7])
 b=9
-print(bin_search(a, b))
-
-print(bin_search( [2,5,7,9,11,17,222], 12))
-
-print(bin_search( [2,5,7,9,11,17,222], 11))
 
 #5
 #решение с помощью рекурсии
@@ -71,40 +64,8 @@ def is_palindtome(string):
     return is_palindtome(string[1:-1])  # заново проверяем строку без 1 и последней буквы
 
 
-print(is_palindtome("Madam, I'm Adam"))
-print(is_palindtome("А роза упала на лапу Азора"))
-print(is_palindtome('потоп'))
-print(is_palindtome('папа'))
 
-#2 способ
-def is_palindtome(string):
-    string=''.join([*filter(str.isalpha, string.lower())])#фильтруем приведя к нижнему регистру и оставляя только буквы
-    l=len(string)
-    for i in range(l//2):
-        if string[i]!=string[-1-i]:
-            return 'NO'
-    return 'YES'
-print(is_palindtome("Madam, I'm Adam"))
-print(is_palindtome("А роза упала на лапу Азора"))
-print(is_palindtome('потоп'))
-print(is_palindtome('папа'))
 
-#3 способ
-def is_palindtome(string):
-    rev_string=''
-    string=string.lower()
-    wrong=['.', '!', ',', ' ', '?', '-',':', ';', "'"]
-    for j in wrong:#удаляем все не нужные знаки и пробелы, получаем 1 строку
-        string=string.replace(j, '')
-    for i in range(len(string), 0, -1):
-        rev_string+=string[i-1]#переварачиваем строку
-        if string==rev_string:
-            return 'YES'
-    return 'NO'
-print(is_palindtome("Madam, I'm Adam"))
-print(is_palindtome("А роза упала на лапу Азора"))
-print(is_palindtome('потоп'))
-print(is_palindtome('папа'))
 
 #6
 def calculatE(path2file):
@@ -130,22 +91,23 @@ def calculatE(path2file):
              except (IndexError, ZeroDivisionError, ValueError) as e:#обработка исключений при некорректном вводе
                  print(e)
         return (','.join(res))
-print(calculatE('t2.txt'))
 
 #7
 def substring_slice(path2file_1,path2file_2):
-    f1=path2file_1.readlines()
-    f2=path2file_2.readlines()
-    str_1, str_2='', ''
-    x=0
-    z=0
-    zn_1, zn_2, res='', '', ''
-    for i in f1:#проходим по элементам 1 файла
+   f1=open(path2file_1)
+   f2=open(path2file_2)
+   f1=f1.readlines()
+   f2=f2.readlines()
+   str_1, str_2='', ''
+   x=0
+   z=0
+   zn_1, zn_2, res='', '', ''
+   for i in f1:#проходим по элементам 1 файла
         str_1+=i
-    for j in f2:#проходим по элементам 2 файла
+   for j in f2:#проходим по элементам 2 файла
         str_2+=j
-    str_1, str_2=str_1.split(), str_2.split()
-    while x+1<len(str_2):
+   str_1, str_2=str_1.split(), str_2.split()
+   while x+1<len(str_2):
         zn_1=int(str_2[x])#1 значение
         zn_2=int(str_2[x+1])+1#последнее
         x=x+2
@@ -156,14 +118,13 @@ def substring_slice(path2file_1,path2file_2):
                     res=res+n[zn_1:zn_2]+' '
                     break
         z+=1
-    return res
-f1=open('test_import_file_2_1.txt')
-f2=open('test_import_file_2_2.txt')
-print(substring_slice(f1,f2))
+   f1.close()
+   f2.close()
+   return res
+
+#print(substring_slice(f1,f2))
 
 #8
-import json
-import re
 with open('periodic_table.json', 'r', encoding='utf-8') as f:
     data=json.load(f)
 def decode_ch(sting_of_elements):
