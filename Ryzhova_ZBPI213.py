@@ -76,29 +76,25 @@ def is_palindtome(string):
 
 
 #6
-def calculatE(path2file):
-    with open(path2file, 'r') as f:
-        l = []
-        res = []
-        for i in f.readlines():
-            l.append(i.replace('\n', '').split())#берем 1 строку и делаем из неё список сохраняя в l
-        for i in l:#перебираем каждое значение
-             try:
-                 if i[0] == '+':
-                     res.append(str(int(i[1]) + int(i[2])))#сохраняем значение в результаты
-                 elif i[0] == '-':
-                     res.append(str(int(i[1]) - int(i[2])))
-                 elif i[0] == '*':
-                     res.append(str(int(i[1]) * int(i[2])))
-                 elif i[0] == '//':
-                     res.append(str(int(i[1]) // int(i[2])))
-                 elif i[0] == '%':
-                     res.append(str(int(i[1]) % int(i[2])))
-                 elif i[0] == '**':
-                     res.append(str(int(i[1]) ** int(i[2])))
-             except (IndexError, ZeroDivisionError, ValueError) as e:#обработка исключений при некорректном вводе
-                 print(e)
-        return (','.join(res))
+def calculate(path2file):
+    result = []
+    with open(path2file, encoding='utf-8') as file:
+        for line in file.readlines():
+            l = [i.strip() for i in line.split()]
+            l1, l2 = int(l[1]), int(l[2])
+            if l[0] == '+':
+                result.append(str(l1 + l2))
+            elif l[0] == '-':
+                result.append(str(l1 - l2))
+            elif l[0] == '*':
+                result.append(str(l1 * l2))
+            elif l[0] == '//':
+                result.append(str(l1 // l2))
+            elif l[0] == '%':
+                result.append(str(l1 % l2))
+            elif l[0] == '**':
+                result.append(str(l1 ** l2))
+        return ','.join(result)
 
 #7
 def substring_slice(path2file_1,path2file_2):
