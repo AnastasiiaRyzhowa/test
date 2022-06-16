@@ -45,8 +45,8 @@ def bin_search(li, element):
             low=mid+1#мало
     return -1
 
-a=sorted([3,1,9,5,2,7])
-b=-1
+#a=sorted([3,1,9,5,2,7])
+#b=-1
 #print(bin_search(a, b))
 
 #a=sorted([3,1,9,5,2,7])
@@ -55,7 +55,7 @@ b=-1
 #5
 #решение с помощью рекурсии
 #один символ и пустая строка является палиндромом
-def is_palindtome(string):
+def is_palindrome(string):
     string=string.lower()
     string=''.join(filter(str.isalpha, string))
     right=len(string)-1
@@ -96,33 +96,16 @@ def calculate(path2file):
         return ','.join(result)
 
 #7
-def substring_slice(path2file_1,path2file_2):
-    f1=open(path2file_1)
-    f2=open(path2file_2)
-    f1=f1.readlines()
-    f2=f2.readlines()
-    string=''
-    number=''
-    answer=''
-    result=''
-    for i in f1:#проходим по элементам 1 файла
-        string+=i
-        string=string.replace("\n", '  ')
-        string=string.split('  ') 
-    
-    for i in f2:#проходим по элементам 2 файла
-        number+=i
-        number=number.replace("\n", '  ')
-        number=number.split('  ')
-    
-    for i in range(len(string)):
-        str=string[i]
-        ind=number[i].split()
-        answer=str[int(ind[0]):(int(ind[1])+1)]
-        result+=answer+" "
-        result=result.strip()
-    return result
-
+def substring_slice(path2file_1, path2file_2):
+    with open(path2file_1, encoding='utf-8') as file:
+        result = [i.strip() for i in file.readlines()]
+    with open(path2file_2, encoding='utf-8') as file:
+        current_line = 0
+        for line in file.readlines():
+            index1, index2 = [int(i) for i in line.split()]
+            result[current_line] = result[current_line][index1:index2 + 1]
+            current_line += 1
+    return ' '.join(result)
 #print(substring_slice(f1,f2))
 
 #8
@@ -305,14 +288,14 @@ class MyError(Exception):
         self.msg=msg
     def __str__(self):#при вызове экземпляра на экран.Оператор вызова переводит в состояние ошибки
         return f'Ошибка: {self.msg}'
-x=input("Введите число больше или равное 100: ")
-try:
-    x=int(x)
-    if x<100:
-        raise (MyError("Значение должно быть больше"))
-except ValueError:
-    print("Введена не правильная переменная")
-except MyError as m:
-    print(m)
-else:
-    print("Число введёно верно:",x)
+# x=input("Введите число больше или равное 100: ")
+# try:
+#     x=int(x)
+#     if x<100:
+#         raise (MyError("Значение должно быть больше"))
+# except ValueError:
+#     print("Введена не правильная переменная")
+# except MyError as m:
+#     print(m)
+# else:
+#     print("Число введёно верно:",x)
