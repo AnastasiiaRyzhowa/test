@@ -257,8 +257,8 @@ class Student:
     def greeting(self): #метод экземпляра
         return 'Hello, I am '+ str(Student) 
 
-    grades=[3,4,5] #не очень понимаю зачем нам атрибут класса, если мы его и так подаем каждому студенту подаем аргументом дефолт
-    def __init__(self, name, surname, grades=[3,4,5]):
+    grades=[2,3,4] 
+    def __init__(self, name, surname, grades=[2,3,4]):
         self.name = name
         self.surname = surname
         self.fullname= '{} {}'.format(name, surname)
