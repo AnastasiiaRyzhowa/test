@@ -26,7 +26,6 @@ def filter_even(li):
 #3
 def square(li):
     return list(map(lambda x: x*x, li))
-   pass
 #a=[2, 4, 6, 8, 9, 11]
 #s=list(map(square, a))
 
