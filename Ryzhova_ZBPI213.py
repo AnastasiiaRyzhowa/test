@@ -56,19 +56,21 @@ def bin_search(li, element):
 #решение с помощью рекурсии
 #один символ и пустая строка является палиндромом
 def is_palindrome(string):
-    string=string.lower()
-    string=''.join(filter(str.isalpha, string))
-    right=len(string)-1
-    left=0
-    palindtome="YES"
-    
-    while left<right:
-        if string[left]==string[right]:
-            left=left-1
-        else:
-            palindtome="NO"
+    s = string.lower()
+    l, r = 0, len(string) - 1
+    palindtome = "YES"
+    while l < r:
+        while not s[l].isalpha():
+            l += 1
+        while not s[r].isalpha():
+            r -= 1
+        if s[l] != s[r]:
+            palindtome = "NO"
             break
-        return palindtome  
+        else:
+            l += 1
+            r -= 1
+    return palindtome
 
 
 
